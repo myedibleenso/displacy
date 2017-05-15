@@ -1,0 +1,138 @@
+ <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" class="displacy" width="1300" height="425" viewBox="0 0 1300 425" preserveAspectRatio="xMinYMax meet" data-format="undefined" id="displacy-svg" style="color: rgb(0, 0, 0); background: rgb(255, 255, 255); font-family: inherit;">
+<text class="displacy-token" fill="currentColor" data-tag="TO" text-anchor="middle" y="275">
+<tspan class="displacy-word" x="100" fill="currentColor" data-tag="TO">To</tspan>
+<tspan class="displacy-tag" x="100" dy="2em" fill="currentColor" data-tag="TO">TO</tspan>
+<tspan class="displacy-lemma" x="100" dy="2em" fill="currentColor" data-tag="to">to</tspan>
+<tspan class="displacy-entity" x="100" dy="2em" fill="currentColor" data-tag="O">O</tspan>
+</text>
+<text class="displacy-token" fill="currentColor" data-tag="VB" text-anchor="middle" y="275">
+<tspan class="displacy-word" x="200" fill="currentColor" data-tag="VB">be</tspan>
+<tspan class="displacy-tag" x="200" dy="2em" fill="currentColor" data-tag="VB">VB</tspan>
+<tspan class="displacy-lemma" x="200" dy="2em" fill="currentColor" data-tag="be">be</tspan>
+<tspan class="displacy-entity" x="200" dy="2em" fill="currentColor" data-tag="O">O</tspan>
+</text>
+<text class="displacy-token" fill="currentColor" data-tag="VBN" text-anchor="middle" y="275">
+<tspan class="displacy-word" x="300" fill="currentColor" data-tag="VBN">loved</tspan>
+<tspan class="displacy-tag" x="300" dy="2em" fill="currentColor" data-tag="VBN">VBN</tspan>
+<tspan class="displacy-lemma" x="300" dy="2em" fill="currentColor" data-tag="love">love</tspan>
+<tspan class="displacy-entity" x="300" dy="2em" fill="currentColor" data-tag="O">O</tspan>
+</text>
+<text class="displacy-token" fill="currentColor" data-tag="IN" text-anchor="middle" y="275">
+<tspan class="displacy-word" x="400" fill="currentColor" data-tag="IN">by</tspan>
+<tspan class="displacy-tag" x="400" dy="2em" fill="currentColor" data-tag="IN">IN</tspan>
+<tspan class="displacy-lemma" x="400" dy="2em" fill="currentColor" data-tag="by">by</tspan>
+<tspan class="displacy-entity" x="400" dy="2em" fill="currentColor" data-tag="O">O</tspan>
+</text>
+<text class="displacy-token" fill="currentColor" data-tag="NNS" text-anchor="middle" y="275">
+<tspan class="displacy-word" x="500" fill="currentColor" data-tag="NNS">unicorns</tspan>
+<tspan class="displacy-tag" x="500" dy="2em" fill="currentColor" data-tag="NNS">NNS</tspan>
+<tspan class="displacy-lemma" x="500" dy="2em" fill="currentColor" data-tag="unicorn">unicorn</tspan>
+<tspan class="displacy-entity" x="500" dy="2em" fill="currentColor" data-tag="O">O</tspan>
+</text>
+<text class="displacy-token" fill="currentColor" data-tag="VBZ" text-anchor="middle" y="275">
+<tspan class="displacy-word" x="600" fill="currentColor" data-tag="VBZ">is</tspan>
+<tspan class="displacy-tag" x="600" dy="2em" fill="currentColor" data-tag="VBZ">VBZ</tspan>
+<tspan class="displacy-lemma" x="600" dy="2em" fill="currentColor" data-tag="be">be</tspan>
+<tspan class="displacy-entity" x="600" dy="2em" fill="currentColor" data-tag="O">O</tspan>
+</text>
+<text class="displacy-token" fill="currentColor" data-tag="DT" text-anchor="middle" y="275">
+<tspan class="displacy-word" x="700" fill="currentColor" data-tag="DT">the</tspan>
+<tspan class="displacy-tag" x="700" dy="2em" fill="currentColor" data-tag="DT">DT</tspan>
+<tspan class="displacy-lemma" x="700" dy="2em" fill="currentColor" data-tag="the">the</tspan>
+<tspan class="displacy-entity" x="700" dy="2em" fill="currentColor" data-tag="O">O</tspan>
+</text>
+<text class="displacy-token" fill="currentColor" data-tag="JJS" text-anchor="middle" y="275">
+<tspan class="displacy-word" x="800" fill="currentColor" data-tag="JJS">greatest</tspan>
+<tspan class="displacy-tag" x="800" dy="2em" fill="currentColor" data-tag="JJS">JJS</tspan>
+<tspan class="displacy-lemma" x="800" dy="2em" fill="currentColor" data-tag="greatest">greatest</tspan>
+<tspan class="displacy-entity" x="800" dy="2em" fill="currentColor" data-tag="O">O</tspan>
+</text>
+<text class="displacy-token" fill="currentColor" data-tag="NN" text-anchor="middle" y="275">
+<tspan class="displacy-word" x="900" fill="currentColor" data-tag="NN">gift</tspan>
+<tspan class="displacy-tag" x="900" dy="2em" fill="currentColor" data-tag="NN">NN</tspan>
+<tspan class="displacy-lemma" x="900" dy="2em" fill="currentColor" data-tag="gift">gift</tspan>
+<tspan class="displacy-entity" x="900" dy="2em" fill="currentColor" data-tag="O">O</tspan>
+</text>
+<text class="displacy-token" fill="currentColor" data-tag="IN" text-anchor="middle" y="275">
+<tspan class="displacy-word" x="1000" fill="currentColor" data-tag="IN">of</tspan>
+<tspan class="displacy-tag" x="1000" dy="2em" fill="currentColor" data-tag="IN">IN</tspan>
+<tspan class="displacy-lemma" x="1000" dy="2em" fill="currentColor" data-tag="of">of</tspan>
+<tspan class="displacy-entity" x="1000" dy="2em" fill="currentColor" data-tag="O">O</tspan>
+</text>
+<text class="displacy-token" fill="currentColor" data-tag="DT" text-anchor="middle" y="275">
+<tspan class="displacy-word" x="1100" fill="currentColor" data-tag="DT">all</tspan>
+<tspan class="displacy-tag" x="1100" dy="2em" fill="currentColor" data-tag="DT">DT</tspan>
+<tspan class="displacy-lemma" x="1100" dy="2em" fill="currentColor" data-tag="all">all</tspan>
+<tspan class="displacy-entity" x="1100" dy="2em" fill="currentColor" data-tag="O">O</tspan>
+</text>
+<text class="displacy-token" fill="currentColor" data-tag="." text-anchor="middle" y="275">
+<tspan class="displacy-word" x="1200" fill="currentColor" data-tag=".">.</tspan>
+<tspan class="displacy-tag" x="1200" dy="2em" fill="currentColor" data-tag=".">.</tspan>
+<tspan class="displacy-lemma" x="1200" dy="2em" fill="currentColor" data-tag=".">.</tspan>
+<tspan class="displacy-entity" x="1200" dy="2em" fill="currentColor" data-tag="O">O</tspan>
+</text>
+<g class="displacy-arrow" data-dir="left" data-label="aux">
+<path class="displacy-arc" d="M110,200 C110,100 290,100 290,200" stroke-width="2px" fill="none" stroke="currentColor" data-dir="left" data-label="aux" id="arrow-0"/>
+<text dy="1em">
+<textPath class="displacy-label" startOffset="50%" fill="currentColor" text-anchor="middle" data-label="aux" data-dir="left" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-0">aux</textPath>
+</text>
+<path class="displacy-arrowhead" d="M110,202 L102,190 118,190" fill="currentColor" data-label="aux" data-dir="left"/>
+</g>
+<g class="displacy-arrow" data-dir="left" data-label="auxpass">
+<path class="displacy-arc" d="M215,200 C215,150 285,150 285,200" stroke-width="2px" fill="none" stroke="currentColor" data-dir="left" data-label="auxpass" id="arrow-1"/>
+<text dy="1em">
+<textPath class="displacy-label" startOffset="50%" fill="currentColor" text-anchor="middle" data-label="auxpass" data-dir="left" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-1">auxpass</textPath>
+</text>
+<path class="displacy-arrowhead" d="M215,202 L207,190 223,190" fill="currentColor" data-label="auxpass" data-dir="left"/>
+</g>
+<g class="displacy-arrow" data-dir="right" data-label="agent">
+<path class="displacy-arc" d="M310,200 C310,100 490,100 490,200" stroke-width="2px" fill="none" stroke="currentColor" data-dir="right" data-label="agent" id="arrow-2"/>
+<text dy="1em">
+<textPath class="displacy-label" startOffset="50%" fill="currentColor" text-anchor="middle" data-label="agent" data-dir="right" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-2">agent</textPath>
+</text>
+<path class="displacy-arrowhead" d="M490,202 L498,190 482,190" fill="currentColor" data-label="agent" data-dir="right"/>
+</g>
+<g class="displacy-arrow" data-dir="left" data-label="csubj">
+<path class="displacy-arc" d="M300,200 C300,0 900,0 900,200" stroke-width="2px" fill="none" stroke="currentColor" data-dir="left" data-label="csubj" id="arrow-3"/>
+<text dy="1em">
+<textPath class="displacy-label" startOffset="50%" fill="currentColor" text-anchor="middle" data-label="csubj" data-dir="left" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-3">csubj</textPath>
+</text>
+<path class="displacy-arrowhead" d="M300,202 L292,190 308,190" fill="currentColor" data-label="csubj" data-dir="left"/>
+</g>
+<g class="displacy-arrow" data-dir="left" data-label="cop">
+<path class="displacy-arc" d="M605,200 C605,50 895,50 895,200" stroke-width="2px" fill="none" stroke="currentColor" data-dir="left" data-label="cop" id="arrow-4"/>
+<text dy="1em">
+<textPath class="displacy-label" startOffset="50%" fill="currentColor" text-anchor="middle" data-label="cop" data-dir="left" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-4">cop</textPath>
+</text>
+<path class="displacy-arrowhead" d="M605,202 L597,190 613,190" fill="currentColor" data-label="cop" data-dir="left"/>
+</g>
+<g class="displacy-arrow" data-dir="left" data-label="det">
+<path class="displacy-arc" d="M710,200 C710,100 890,100 890,200" stroke-width="2px" fill="none" stroke="currentColor" data-dir="left" data-label="det" id="arrow-5"/>
+<text dy="1em">
+<textPath class="displacy-label" startOffset="50%" fill="currentColor" text-anchor="middle" data-label="det" data-dir="left" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-5">det</textPath>
+</text>
+<path class="displacy-arrowhead" d="M710,202 L702,190 718,190" fill="currentColor" data-label="det" data-dir="left"/>
+</g>
+<g class="displacy-arrow" data-dir="left" data-label="amod">
+<path class="displacy-arc" d="M815,200 C815,150 885,150 885,200" stroke-width="2px" fill="none" stroke="currentColor" data-dir="left" data-label="amod" id="arrow-6"/>
+<text dy="1em">
+<textPath class="displacy-label" startOffset="50%" fill="currentColor" text-anchor="middle" data-label="amod" data-dir="left" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-6">amod</textPath>
+</text>
+<path class="displacy-arrowhead" d="M815,202 L807,190 823,190" fill="currentColor" data-label="amod" data-dir="left"/>
+</g>
+<g class="displacy-arrow" data-dir="right" data-label="prep_of">
+<path class="displacy-arc" d="M910,200 C910,100 1090,100 1090,200" stroke-width="2px" fill="none" stroke="currentColor" data-dir="right" data-label="prep_of" id="arrow-7"/>
+<text dy="1em">
+<textPath class="displacy-label" startOffset="50%" fill="currentColor" text-anchor="middle" data-label="prep_of" data-dir="right" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-7">prep_of</textPath>
+</text>
+<path class="displacy-arrowhead" d="M1090,202 L1098,190 1082,190" fill="currentColor" data-label="prep_of" data-dir="right"/>
+</g>
+<g class="displacy-arrow" data-dir="right" data-label="punct">
+<path class="displacy-arc" d="M905,200 C905,50 1195,50 1195,200" stroke-width="2px" fill="none" stroke="currentColor" data-dir="right" data-label="punct" id="arrow-8"/>
+<text dy="1em">
+<textPath class="displacy-label" startOffset="50%" fill="currentColor" text-anchor="middle" data-label="punct" data-dir="right" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-8">punct</textPath>
+</text>
+<path class="displacy-arrowhead" d="M1195,202 L1203,190 1187,190" fill="currentColor" data-label="punct" data-dir="right"/>
+</g>
+</svg>

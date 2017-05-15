@@ -1,27 +1,26 @@
 {
-  "name": "displacy-demo",
-  "version": "1.0.2",
-  "description": "An open-source NLP visualiser for the modern web",
-  "main": "index.jade",
+  "name": "displacy-processors",
+  "version": "0.0.1",
+  "description": "NLP graph visualizer for clulab.processors & py-processors.  Fork of displacy.js",
+  "main": "displacy-processors.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/explosion/displacy.git"
+    "url": "git+https://github.com/myedibleenso/displacy-processors.git"
   },
   "keywords": [
     "nlp",
     "visualizer",
-    "spacy"
+    "processors",
+    "py-processors"
   ],
   "author": "Ines Montani",
+  "contributors": ["Gus Hahn-Powell <https://github.com/myedibleenso>"],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/explosion/displacy/issues"
+    "url": "https://github.com/myedibleenso/displacy-processors/issues"
   },
-  "homepage": "https://github.com/explosion/displacy#readme",
-  "devDependencies": {
-    "harp": "^0.20.3"
-  }
+  "homepage": "https://github.com/myedibleenso/displacy-processors#readme"
 }

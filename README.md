@@ -1,63 +1,86 @@
-<a href="https://explosion.ai"><img src="https://explosion.ai/assets/img/logo.svg" width="125" height="125" align="right" /></a>
+# displacy-processors.js
 
-# displaCy.js: An open-source NLP visualiser for the modern web
+`displacy-processors.js` is a fork of [displaCy.js](https://demos.explosion.ai/displacy) adapted for use with [`clulab/processors`](https) and [`py-processors`]().  
 
-[displaCy.js](https://demos.explosion.ai/displacy) is a modern and service-independent visualisation library. We hope this makes it easy to compare different services, and explore your own in-house models. If you're using [spaCy](https://spacy.io)'s syntactic parser, displaCy should be part of your regular workflow. Because spaCy's parser is statistical, it's often hard to predict how it will analyse a given sentence. Using displaCy, you can simply try and see. You can also share the page for discussion with your team, or save the SVG to use elsewhere. If you're developing your own  model, you can run the service yourself — it's 100% open source.
 
-To read more about displaCy.js, check out the [blog post](https://explosion.ai/blog/displacy-js-nlp-visualizer).
+[![npm](https://img.shields.io/npm/v/displacy-processors.svg)](https://www.npmjs.com/package/displacy-processors)
 
-[![npm](https://img.shields.io/npm/v/displacy.svg)](https://www.npmjs.com/package/displacy)
 
-## Run the demo
+## Using `displacy-processors.js`
 
-This demo is implemented in [Jade (aka Pug)](https://www.jade-lang.org), an extensible templating language that compiles to HTML, and is built or served by [Harp](https://harpjs.com). To serve it locally on [http://localhost:9000](http://localhost:9000), simply run:
+To use the visualizer in your project, download [`displacy-processors.js`](displacy-processors.js) from GitHub or via npm:
 
 ```bash
-sudo npm install --global harp
-git clone https://github.com/explosion/displacy
-cd display
-harp server
+npm install myedibleenso/displacy-processors
 ```
 
-Or simply install it from npm:
-
-```bash
-npm install displacy-demo
-```
-
-The demo is written in ECMAScript 6. For full, cross-browser compatibility, make sure to use a compiler like [Babel](https://github.com/babel/babel). For more info, see this [compatibility table](https://kangax.github.io/compat-table/es6/).
-
-## Using displacy.js
-
-To use displaCy in your project, download [`displacy.js`](assets/js/displacy.js) from GitHub or via npm:
-
-```bash
-npm install displacy
-```
-
-Then include the file and initialize a new instance specifying the API and settings:
+Include the file and initialize a new `dispaCyProcessors` instance (see the [settings](#settings) table for a description of all available settings):
 
 ```javascript
-const displacy = new displaCy('http://localhost:8000', {
+const visualizer = new displaCyProcessors({
     container: '#displacy',
-    format: 'spacy',
     distance: 300,
     offsetX: 100
 });
 ```
 
-Our service that produces the input data is open source, too. You can find it at [spacy-services](https://github.com/explosion/spacy-services).
+`displacy-processors` operates on the `json` representation of a `Sentence` (refer to the [schema](https://github.com/myedibleenso/processors-server/blob/master/src/main/resources/json/schema/sentence.json) for more details).
 
+```javascript
+var sentence = {
+  "words": ["To", "be", "loved", "by", "unicorns", "is", "the", "greatest", "gift", "of", "all", "."],
+  "lemmas": ["to", "be", "love", "by", "unicorn", "be", "the", "greatest", "gift", "of", "all", "."],
+  "tags": ["TO", "VB", "VBN", "IN", "NNS", "VBZ", "DT", "JJS", "NN", "IN", "DT", "."],
+  "entities": ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  "startOffsets": [0, 3, 6, 12, 15, 24, 27, 31, 40, 45, 48, 51],
+  "endOffsets": [2, 5, 11, 14, 23, 26, 30, 39, 44, 47, 51, 52],
+  "graphs": {
+    "stanford-basic": {
+      "edges": [
+        {"destination": 0, "relation": "aux", "source": 2},
+        {"destination": 1, "relation": "auxpass", "source": 2},
+        {"destination": 3, "relation": "prep", "source": 2},
+        {"destination": 4, "relation": "pobj", "source": 3},
+        {"destination": 2, "relation": "csubj", "source": 8},
+        {"destination": 5, "relation": "cop", "source": 8},
+        {"destination": 6, "relation": "det", "source": 8},
+        {"destination": 7, "relation": "amod", "source": 8},
+        {"destination": 9, "relation": "prep", "source": 8},
+        {"destination": 11, "relation": "punct", "source": 8},
+        {"destination": 10, "relation": "pobj", "source": 9}
+      ],
+      "roots": [8]
+    },
+    "stanford-collapsed": {
+      "edges": [
+        {"destination": 0, "relation": "aux", "source": 2},
+        {"destination": 1, "relation": "auxpass", "source": 2},
+        {"destination": 4, "relation": "agent", "source": 2},
+        {"destination": 2, "relation": "csubj", "source": 8},
+        {"destination": 5, "relation": "cop", "source": 8},
+        {"destination": 6, "relation": "det", "source": 8},
+        {"destination": 7, "relation": "amod", "source": 8},
+        {"destination": 10, "relation": "prep_of", "source": 8},
+        {"destination": 11, "relation": "punct", "source": 8}
+      ],
+     "roots": [8]
+   }
+ }
+}
+```
+
+The `render` method is used to display a selected graph.  Note that a `Sentence` may have several associated graphs (parses).  Here we'll display the syntactic dependency parse using the [Stanford collapsed representation](https://nlp.stanford.edu/software/dependencies_manual.pdf).
+```javascript
+visualizer.render(sentence, graphName = "stanford-collapsed")
+```
+
+!["example-parse.svg"](examples/example-parse.svg)
+# Settings
 The following settings are available:
 
 | Setting | Description | Default |
 | --- | --- | --- |
-| **container** | element to draw displaCy in, can be any query selector | `#displacy` |
-| **format** | format used to generate parse (`'spacy'` or `'google'`) | `'spacy'` |
-| **defaultText** | text used if displaCy is run without text specified | `'Hello World.'` |
-| **defaultModel** | model used if displaCy is run without model specified | `'en'` |
-| **collapsePunct** |  collapse punctuation | `true` |
-| **collapsePhrase** | collapse phrases | `true` |
+| **container** | element in which to render the specified graph.  This can be any query selector | `#displacy` |
 | **distance** | distance between words in px | `300` |
 | **offsetX** | spacing on left side of the SVG in px | `50` |
 | **arrowSpacing** | spacing between arrows in px to avoid overlaps | `20` |
@@ -67,82 +90,11 @@ The following settings are available:
 | **font** | font face for all text | `'inherit'` |
 | **color** | text color, HEX, RGB or color names | `'#000000'` |
 | **bg** | background color, HEX, RGB or color names | `'#ffffff'` |
-| **onStart** | function to be executed on start of server request | `false` |
-| **onSuccess** | callback function to be executed on successful server response | `false` |
-| **onError** | function to be executed if request fails | `false` |
-
-## Visualising a Parse
-
-The `parse()` method renders a parse generated by spaCy as an SVG in the container.
-
-```javascript
-displacy.parse('This is a sentence.', 'en', {
-    collapsePunct: false,
-    collapsePhrase: false,
-    color: '#ffffff',
-    bg: '#000000'
-});
-```
-
-The visual settings specified here override the global settings. The available settings are **collapsePunct**, **collapsePhrase**, **font**, **color** and **bg**.
 
 
-## Rendering a Parse Manually
+## Changing the theme and colors
 
-Alternatively, you can use `render()` to manually render a JSON-formatted set of arcs and words:
-
-```javascript
-const parse = {
-    arcs: [
-        { dir: 'right', end: 1, label: 'npadvmod', start: 0 }
-    ],
-    words: [
-        { tag: 'UH', text: 'Hello' },
-        { tag: 'NNP', text: 'World.' }
-    ]
-};
-
-displacy.render(parse, {
-    color: '#ff0000'
-});
-```
-
-The visual settings specified here override the global settings.  The available settings are **font**, **color** and **bg**.
-
-## Converting output from other formats and adding your own
-
-By default, displaCy expects spaCy's JSON output in the following style:
-
-```json
-{
-    "arcs": [
-        { "dir": "left", "end": 4, "label": "nsubj", "start": 0 }
-    ],
-
-    "words": [
-        { "tag": "NNS", "text": "Robots" }
-    ]
-}
-```
-
-If `format` is set to `'google'`, the API response is converted from [Google's format](https://cloud.google.com/natural-language/docs/basics#syntactic_analysis_responses). To add your own conversion rules, add a new case to `handleConversion()`:
-
-```javascript
-handleConversion(parse) {
-    switch(this.format) {
-        case 'spacy': return parse; break;
-        case 'google': return({ words: ..., arcs: ... }); break;
-        case 'your_format': return({ words: ..., arcs: ... }); break;
-        default: return parse;
-    }
-}
-```
-
-You can now initialize displaCy with `format: 'your_format'`.
-
-## Changing the theme and colours
-
-You can find the current theme settings in [`/assets/css/_displacy-theme.sass`](assets/css/_displacy-theme.sass). All elements contained in the SVG output come with tags and data attributes and can be styled flexibly using CSS. By default, the `currentColor` of the element is used for colouring, meaning only need to change the `color` property in CSS.
+You can find the current theme settings in [`css/_displacy-theme.sass`](css/_displacy-theme.sass). All elements contained in the SVG output come with tags and data attributes and can be styled flexibly using CSS. By default, the `currentColor` of the element is used for coloring, meaning only need to change the `color` property in CSS.
 
 The following classes are available:
 
@@ -215,7 +167,7 @@ Using a combination of those selectors and some basic CSS logic, you can create 
 
 ## Adding custom data attributes
 
-displaCy lets you define custom attributes via the JSON representation of the parse on both `words` and `arcs`:
+`displaCy` lets you define custom attributes via the JSON representation of the parse on both `words` and `arcs`:
 
 ```json
 "words": [

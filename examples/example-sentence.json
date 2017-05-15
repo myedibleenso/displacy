@@ -1,0 +1,40 @@
+{
+  "words": ["To", "be", "loved", "by", "unicorns", "is", "the", "greatest", "gift", "of", "all", "."],
+  "lemmas": ["to", "be", "love", "by", "unicorn", "be", "the", "greatest", "gift", "of", "all", "."],
+  "tags": ["TO", "VB", "VBN", "IN", "NNS", "VBZ", "DT", "JJS", "NN", "IN", "DT", "."],
+  "entities": ["O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O", "O"],
+  "startOffsets": [0, 3, 6, 12, 15, 24, 27, 31, 40, 45, 48, 51],
+  "endOffsets": [2, 5, 11, 14, 23, 26, 30, 39, 44, 47, 51, 52],
+  "graphs": {
+    "stanford-basic": {
+      "edges": [
+        {"destination": 0, "relation": "aux", "source": 2},
+        {"destination": 1, "relation": "auxpass", "source": 2},
+        {"destination": 3, "relation": "prep", "source": 2},
+        {"destination": 4, "relation": "pobj", "source": 3},
+        {"destination": 2, "relation": "csubj", "source": 8},
+        {"destination": 5, "relation": "cop", "source": 8},
+        {"destination": 6, "relation": "det", "source": 8},
+        {"destination": 7, "relation": "amod", "source": 8},
+        {"destination": 9, "relation": "prep", "source": 8},
+        {"destination": 11, "relation": "punct", "source": 8},
+        {"destination": 10, "relation": "pobj", "source": 9}
+      ],
+      "roots": [8]
+    },
+    "stanford-collapsed": {
+      "edges": [
+        {"destination": 0, "relation": "aux", "source": 2},
+        {"destination": 1, "relation": "auxpass", "source": 2},
+        {"destination": 4, "relation": "agent", "source": 2},
+        {"destination": 2, "relation": "csubj", "source": 8},
+        {"destination": 5, "relation": "cop", "source": 8},
+        {"destination": 6, "relation": "det", "source": 8},
+        {"destination": 7, "relation": "amod", "source": 8},
+        {"destination": 10, "relation": "prep_of", "source": 8},
+        {"destination": 11, "relation": "punct", "source": 8}
+      ],
+     "roots": [8]
+   }
+ }
+}

@@ -4,16 +4,12 @@
 
 'use strict';
 
-class displaCy {
-    constructor (api, options) {
-        this.api = api;
-        this.container = typeof(options.container) == 'string' ? document.querySelector(options.container || '#displacy') : options.container;
+class displaCyProcessors {
+    constructor (options) {
 
-        this.format = options.format || 'spacy';
-        this.defaultText = options.defaultText || 'Hello World.';
-        this.defaultModel = options.defaultModel || 'en';
-        this.collapsePunct = (options.collapsePunct != undefined) ?  options.collapsePunct : true;
-        this.collapsePhrase = (options.collapsePhrase != undefined) ?  options.collapsePhrase : true;
+        this.container = document.querySelector(options.container || '#displacy');
+
+        this.$ = document.querySelector.bind(document);
 
         this.onStart = options.onStart || false;
         this.onSuccess = options.onSuccess || false;
@@ -30,40 +26,112 @@ class displaCy {
         this.bg = options.bg || '#ffffff';
     }
 
-    parse(text = this.defaultText, model = this.defaultModel, settings = {}) {
-        if(typeof this.onStart === 'function') this.onStart();
+    exportSVG() {
+      // http://stackoverflow.com/a/38481556
+      var parseStyles = function(svg) {
+        var styleSheets = [];
+        var i;
+        // get the stylesheets of the document (ownerDocument in case svg is in <iframe> or <object>)
+        var docStyles = svg.ownerDocument.styleSheets;
 
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST', this.api, true);
-        xhr.setRequestHeader('Content-type', 'text/plain');
-        xhr.onreadystatechange = () => {
-            if(xhr.readyState === 4 && xhr.status === 200) {
-                if(typeof this.onSuccess === 'function') this.onSuccess();
-                this.render(JSON.parse(xhr.responseText), settings, text);
-            }
-
-            else if(xhr.status !== 200) {
-                if(typeof this.onError === 'function') this.onError(xhr.statusText);
-            }
+        // transform the live StyleSheetList to an array to avoid endless loop
+        for (i = 0; i < docStyles.length; i++) {
+          styleSheets.push(docStyles[i]);
         }
 
-        xhr.onerror = () => {
-            xhr.abort();
-            if(typeof this.onError === 'function') this.onError();
+        if (!styleSheets.length) {
+          return;
         }
 
-        xhr.send(JSON.stringify({ text, model,
-            collapse_punctuation: (settings.collapsePunct != undefined) ? settings.collapsePunct : this.collapsePunct,
-            collapse_phrases: (settings.collapsePhrase != undefined) ? settings.collapsePhrase : this.collapsePhrase
-        }));
+        var defs = svg.querySelector('defs') || document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+        if (!defs.parentNode) { svg.insertBefore(defs, svg.firstElementChild); }
+        svg.matches = svg.matches || svg.webkitMatchesSelector || svg.mozMatchesSelector || svg.msMatchesSelector || svg.oMatchesSelector;
+
+        // iterate through all document's stylesheets
+        for (i = 0; i < styleSheets.length; i++) {
+          var currentStyle = styleSheets[i]
+
+          var rules;
+          try {
+            rules = currentStyle.cssRules;
+          } catch (e) {
+            continue;
+          }
+          // create a new style element
+          var style = document.createElement('style');
+          // some stylesheets can't be accessed and will throw a security error
+          var l = rules && rules.length;
+          // iterate through each cssRules of this stylesheet
+          for (var j = 0; j < l; j++) {
+            // get the selector of this cssRules
+            var selector = rules[j].selectorText;
+            // probably an external stylesheet we can't access
+            if (!selector) {
+              continue;
+            }
+
+            // is it our svg node or one of its children ?
+            if ((svg.matches && svg.matches(selector)) || svg.querySelector(selector)) {
+
+              var cssText = rules[j].cssText;
+              // append it to our <style> node
+              style.innerHTML += cssText + '\n';
+            }
+          }
+          // if we got some rules
+          // append the style node to the clone's defs
+          if (style.innerHTML) { defs.appendChild(style); }
+        }
+      }
+
+      var svg = this.$("#" + this.getSVGname())
+      // first create a clone of our svg node so we don't mess the original one
+      var clone = svg.cloneNode(true);
+      // parse the styles
+      parseStyles(clone);
+      // create a doctype
+      var svgDocType = document.implementation.createDocumentType('svg', "-//W3C//DTD SVG 1.1//EN", "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd");
+      // a fresh svg document
+      var svgDoc = document.implementation.createDocument('http://www.w3.org/2000/svg', 'svg', svgDocType);
+      // replace the documentElement with our clone
+      svgDoc.replaceChild(clone, svgDoc.documentElement);
+      // get the data
+      var svgData = (new XMLSerializer()).serializeToString(svgDoc);
+
+      var a = document.createElement('a');
+      a.href = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(svgData.replace(/></g, '>\n\r<'));
+      a.download = 'graph.svg';
+      a.innerHTML = 'save to file';
+      document.body.appendChild(a);
     }
 
-    render(parse, settings = {}, text) {
-        parse = this.handleConversion(parse);
-
-        if(text) console.log(`%c💥  JSON for "${text}"\n%c${JSON.stringify(parse)}`, 'font: bold 16px/2 arial, sans-serif', 'font: 13px/1.5 Consolas, "Andale Mono", Menlo, Monaco, Courier, monospace');
-
+    handleParsedSentence(sentence, graphName = "stanford-collapsed") {
+        return ({
+          words: sentence.words.map((w, i) => ({
+            text: sentence.words[i],
+            tag: sentence.tags[i],
+            lemma: sentence.lemmas[i],
+            entity: sentence.entities[i]
+            // data: [
+            //   ["lemmas", sentence.lemmas[i]],
+            //   ["entities", sentence.entities[i]]
+            // ]
+          })),
+          // conversions are to ensure edge label is properly rotated
+          arcs: sentence.graphs[graphName].edges.map(({ relation: rel, source: src, destination: dest}, i) => ({
+              label: rel,
+              start: Math.min(dest, src),
+              end: Math.max(dest, src),
+              dir: ((src > dest) ? 'left' : 'right')
+          }))
+        })
+    }
+    getSVGname() {return this.container.id + '-svg'; }
+    render(sentence, graphName = "stanford-collapsed", settings = {}, text) {
+        var parse = this.handleParsedSentence(sentence, graphName = "stanford-collapsed");
         this.levels = [...new Set(parse.arcs.map(({ end, start }) => end - start).sort((a, b) => a - b))];
+        // starting node for most distant dependency
+        // (note that disregard for sign means )
         this.highestLevel = this.levels.indexOf(this.levels.slice(-1)[0]) + 1;
         this.offsetY = this.distance / 2 * this.highestLevel;
 
@@ -72,7 +140,7 @@ class displaCy {
 
         this.container.innerHTML = '';
         this.container.appendChild(this._el('svg', {
-            id: 'displacy-svg',
+            id: this.getSVGname(),
             classnames: [ 'displacy' ],
             attributes: [
                 [ 'width', width ],
@@ -94,7 +162,7 @@ class displaCy {
     }
 
     renderWords(words) {
-        return (words.map(( { text, tag, data = [] }, i) => this._el('text', {
+        return (words.map(( { text, tag, lemma, entity, data = [] }, i) => this._el('text', {
             classnames: [ 'displacy-token' ],
             attributes: [
                 ['fill', 'currentColor'],
@@ -122,6 +190,26 @@ class displaCy {
                         ['data-tag', tag]
                     ],
                     text: tag
+                }),
+                this._el('tspan', {
+                    classnames: [ 'displacy-lemma' ],
+                    attributes: [
+                        ['x', this.offsetX + i * this.distance],
+                        ['dy', '2em'],
+                        ['fill', 'currentColor'],
+                        ['data-tag', lemma]
+                    ],
+                    text: lemma
+                }),
+                this._el('tspan', {
+                    classnames: [ 'displacy-entity' ],
+                    attributes: [
+                        ['x', this.offsetX + i * this.distance],
+                        ['dy', '2em'],
+                        ['fill', 'currentColor'],
+                        ['data-tag', entity]
+                    ],
+                    text: entity
                 })
             ]
         })));
@@ -129,7 +217,6 @@ class displaCy {
 
     renderArrows(arcs) {
         return arcs.map(({ label, end, start, dir, data = [] }, i) => {
-            const rand = Math.random().toString(36).substr(2, 8);
             const level = this.levels.indexOf(end - start) + 1;
             const startX = this.offsetX + start * this.distance + this.arrowSpacing * (this.highestLevel - level) / 4;
             const startY = this.offsetY;
@@ -147,7 +234,7 @@ class displaCy {
                 ],
                 children:  [
                     this._el('path', {
-                        id: 'arrow-' + rand,
+                        id: 'arrow-' + i,
                         classnames: [ 'displacy-arc' ],
                         attributes: [
                             [ 'd', `M${startX},${startY} C${startX},${curve} ${endpoint},${curve} ${endpoint},${startY}`],
@@ -165,7 +252,7 @@ class displaCy {
                         ],
                         children: [
                             this._el('textPath', {
-                                xlink: '#arrow-' + rand,
+                                xlink: '#arrow-' + i,
                                 classnames: [ 'displacy-label' ],
                                 attributes: [
                                     [ 'startOffset', '50%' ],
@@ -191,17 +278,6 @@ class displaCy {
                 ]
             });
         });
-    }
-
-    handleConversion(parse) {
-        switch(this.format) {
-            case 'spacy': return parse; break;
-            case 'google': return({
-                    words: parse.map(({ text: { content: text }, partOfSpeech: { tag }} ) => ({ text, tag })),
-                    arcs: parse.map(({ dependencyEdge: { label, headTokenIndex: j }}, i) => (i != j) ? ({ label, start: Math.min(i, j), end: Math.max(i, j), dir: (j > i) ? 'left' : 'right' }) : null).filter(word => word != null)
-                }); break;
-            default: return parse;
-        }
     }
 
     _el(tag, options) {
