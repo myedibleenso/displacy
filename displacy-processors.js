@@ -2,6 +2,8 @@
 //- 💥 DISPLACY
 //- ----------------------------------
 
+
+
 'use strict';
 
 class displaCyProcessors {
@@ -102,7 +104,7 @@ class displaCyProcessors {
       a.href = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(svgData.replace(/></g, '>\n\r<'));
       a.download = 'graph.svg';
       a.innerHTML = 'save to file';
-      document.body.appendChild(a);
+      this.container.appendChild(a);
     }
 
     handleParsedSentence(sentence, graphName = "stanford-collapsed") {
@@ -296,3 +298,5 @@ class displaCyProcessors {
         return el;
     }
 }
+
+module.exports = displaCyProcessors
