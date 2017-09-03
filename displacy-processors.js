@@ -28,7 +28,7 @@ class displaCyProcessors {
         this.bg = options.bg || '#ffffff';
     }
 
-    exportSVG() {
+    exportSVG(fname = "graph.svg") {
       // http://stackoverflow.com/a/38481556
       var parseStyles = function(svg) {
         var styleSheets = [];
@@ -102,9 +102,8 @@ class displaCyProcessors {
 
       var a = document.createElement('a');
       a.href = 'data:image/svg+xml; charset=utf8, ' + encodeURIComponent(svgData.replace(/></g, '>\n\r<'));
-      a.download = 'graph.svg';
-      a.innerHTML = 'save to file';
-      this.container.appendChild(a);
+      a.download = fname;
+      a.click();
     }
 
     handleParsedSentence(sentence, graphName = "stanford-collapsed") {
