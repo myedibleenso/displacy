@@ -18,7 +18,7 @@ class displaCyProcessors {
         this.onError = options.onError || false;
 
         this.distance = options.distance || 200;
-        this.offsetX = options.offsetX || 50;
+        this.offsetX = options.offsetX || 70;
         this.arrowSpacing = options.arrowSpacing || 20;
         this.arrowWidth = options.arrowWidth || 10;
         this.arrowStroke = options.arrowStroke || 2;
@@ -129,7 +129,7 @@ class displaCyProcessors {
     }
     getSVGname() {return this.container.id + '-svg'; }
     render(sentence, graphName = "stanford-collapsed", settings = {}, text) {
-        var parse = this.handleParsedSentence(sentence, graphName = "stanford-collapsed");
+        var parse = this.handleParsedSentence(sentence, graphName);
         this.levels = [...new Set(parse.arcs.map(({ end, start }) => end - start).sort((a, b) => a - b))];
         // starting node for most distant dependency
         // (note that disregard for sign means )
