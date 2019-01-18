@@ -105,7 +105,7 @@ class displaCyProcessors {
       document.body.appendChild(a);
     }
 
-    handleParsedSentence(sentence, graphName = "stanford-collapsed") {
+    handleParsedSentence(sentence, graphName) {
         return ({
           words: sentence.words.map((w, i) => ({
             text: sentence.words[i],
@@ -127,7 +127,7 @@ class displaCyProcessors {
         })
     }
     getSVGname() {return this.container.id + '-svg'; }
-    render(sentence, graphName = "stanford-collapsed", settings = {}, text) {
+    render(sentence, graphName, settings = {}, text) {
         var parse = this.handleParsedSentence(sentence, graphName);
         this.levels = [...new Set(parse.arcs.map(({ end, start }) => end - start).sort((a, b) => a - b))];
         // starting node for most distant dependency
