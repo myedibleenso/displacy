@@ -113,7 +113,8 @@ class displaCyProcessors {
             text: sentence.words[i],
             tag: sentence.tags[i],
             lemma: sentence.lemmas[i],
-            entity: sentence.entities[i]
+            entity: sentence.entities[i],
+            chunk: sentence.chunks[i]
             // data: [
             //   ["lemmas", sentence.lemmas[i]],
             //   ["entities", sentence.entities[i]]
@@ -164,7 +165,7 @@ class displaCyProcessors {
     }
 
     renderWords(words) {
-        return (words.map(( { text, tag, lemma, entity, data = [] }, i) => this._el('text', {
+        return (words.map(( { text, tag, lemma, entity, chunk, data = [] }, i) => this._el('text', {
             classnames: [ 'displacy-token' ],
             attributes: [
                 ['fill', 'currentColor'],
@@ -212,6 +213,16 @@ class displaCyProcessors {
                         ['data-tag', entity]
                     ],
                     text: entity
+                }),
+                this._el('tspan', {
+                    classnames: [ 'displacy-chunk' ],
+                    attributes: [
+                        ['x', this.offsetX + i * this.distance],
+                        ['dy', '2em'],
+                        ['fill', 'currentColor'],
+                        ['data-tag', chunk]
+                    ],
+                    text: chunk
                 })
             ]
         })));
